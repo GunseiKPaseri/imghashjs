@@ -1,15 +1,17 @@
 import ImgHash from './ImgHash';
+import { imgConvert } from './util';
 const AHASH_SAMPLE_SIZE = 8;
 /**
  * Averave Hash
  * @param img Jimp object (**Destroyable**)
- * @param sampleSize resize square size(=8)
+ * @param option
  * @returns ahash
  */
-const ahash = (img, sampleSize = AHASH_SAMPLE_SIZE) => {
-    img
-        .resize(sampleSize, sampleSize)
-        .grayscale();
+const ahash = (img, option = {}) => {
+    var _a, _b;
+    const sampleSize = (_a = option.sampleSize) !== null && _a !== void 0 ? _a : AHASH_SAMPLE_SIZE;
+    const convertSequence = (_b = option.convertSequence) !== null && _b !== void 0 ? _b : 'rg';
+    imgConvert(img, sampleSize, sampleSize, convertSequence);
     const imgarray = new Array(sampleSize);
     let sum = 0;
     for (let x = 0; x < sampleSize; x++) {

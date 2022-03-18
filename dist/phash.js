@@ -1,4 +1,5 @@
 import ImgHash from './ImgHash';
+import { imgConvert } from './util';
 const PHASH_SAMPLE_SIZE = 32;
 const INV_SQRT_2 = 1 / Math.sqrt(2.0);
 const DCTCoefficients = (n) => (n === 0 ? INV_SQRT_2 : 1);
@@ -38,31 +39,33 @@ const applyDCT = (f, size, sampleSize) => {
 /**
  * Perseptual Hash (use DCT)
  * @param img Jimp object (**Destroyable**)
- * @param option DCT Sampling Square size(=32) & Low frequencies Square Size(=8) O(DCTSize^2 * lowSize^2)
+ * @param option
  * @returns phash
  */
-const phash = (img, option = { DCTSize: 32, lowSize: 8 }) => {
-    img
-        .resize(option.DCTSize, option.DCTSize)
-        .grayscale();
-    const imgarray = new Array(option.DCTSize);
-    for (let x = 0; x < option.DCTSize; x++) {
-        imgarray[x] = new Array(option.DCTSize);
-        for (let y = 0; y < option.DCTSize; y++) {
+const phash = (img, option = {}) => {
+    var _a, _b, _c;
+    const DCTSize = (_a = option.DCTSize) !== null && _a !== void 0 ? _a : 32;
+    const lowSize = (_b = option.lowSize) !== null && _b !== void 0 ? _b : 8;
+    const convertSequence = (_c = option.convertSequence) !== null && _c !== void 0 ? _c : 'rg';
+    imgConvert(img, DCTSize, DCTSize, convertSequence);
+    const imgarray = new Array(DCTSize);
+    for (let x = 0; x < DCTSize; x++) {
+        imgarray[x] = new Array(DCTSize);
+        for (let y = 0; y < DCTSize; y++) {
             imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff;
         }
     }
-    const dct = applyDCT(imgarray, option.lowSize, option.DCTSize);
+    const dct = applyDCT(imgarray, lowSize, DCTSize);
     let sum = 0;
-    for (let x = 0; x < option.lowSize; x++) {
-        for (let y = 0; y < option.lowSize; y++) {
+    for (let x = 0; x < lowSize; x++) {
+        for (let y = 0; y < lowSize; y++) {
             sum += dct[x][y];
         }
     }
-    const avg = sum / (option.lowSize * option.lowSize);
+    const avg = sum / (lowSize * lowSize);
     let result = '';
-    for (let x = 0; x < option.lowSize; x++) {
-        for (let y = 0; y < option.lowSize; y++) {
+    for (let x = 0; x < lowSize; x++) {
+        for (let y = 0; y < lowSize; y++) {
             result += (dct[x][y] > avg ? '1' : '0');
         }
     }

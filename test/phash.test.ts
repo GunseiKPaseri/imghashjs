@@ -11,7 +11,7 @@ test('#phash', async () => {
   ]
   const imgs = await Promise.all(target.map(address => jimp.read(address)))
   const hash = imgs.map(img => phash(img.clone()))
-  // console.log(hash.map(x => x.hex))
+  console.log(hash.map(x => x.hex))
   const score:number[][] = new Array(target.length)
   for (let i = 0; i < hash.length; i++) {
     expect(hash[i].bit64).toBe(imgs[i].hash())

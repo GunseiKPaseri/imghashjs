@@ -10,6 +10,7 @@ test('#ahash', async () => {
   ]
   const imgs = await Promise.all(target.map(address => jimp.read(address)))
   const hash = imgs.map(img => ahash(img))
+  console.log(hash.map(x => x.hex))
   const score:number[][] = new Array(target.length)
   for (let i = 0; i < hash.length; i++) {
     score[i] = new Array(target.length)

@@ -1,18 +1,25 @@
 import Jimp from 'jimp'
 import ImgHash from './ImgHash'
+import { imgConvert } from './util'
 
 /**
  * phash option
  */
-export interface PHASH_SAMPLING_SIZE{
+export interface PHASH_OPTION{
   /**
-   * DCT Sampling square size
+   * DCT Sampling square size (=32)
    */
-  DCTSize: number
+  DCTSize?: number
   /**
-   *  DCT low frequencies square size
+   *  DCT low frequencies square size (=8)
    */
-  lowSize: number
+  lowSize?: number
+  /**
+   * convert sequence (=rg)
+   * r: resize
+   * g: glayscale
+   */
+  convertSequence?: 'rg' | 'gr'
 }
 
 const PHASH_SAMPLE_SIZE = 32
@@ -60,34 +67,37 @@ const applyDCT = (f: number[][], size: number, sampleSize: number) => {
 /**
  * Perseptual Hash (use DCT)
  * @param img Jimp object (**Destroyable**)
- * @param option DCT Sampling Square size(=32) & Low frequencies Square Size(=8) O(DCTSize^2 * lowSize^2)
+ * @param option
  * @returns phash
  */
-const phash = (img: Jimp, option: PHASH_SAMPLING_SIZE = { DCTSize: 32, lowSize: 8 }) => {
-  img
-    .resize(option.DCTSize, option.DCTSize)
-    .grayscale()
-  const imgarray: number[][] = new Array(option.DCTSize)
+const phash = (img: Jimp, option: PHASH_OPTION = {}) => {
+  const DCTSize = option.DCTSize ?? 32
+  const lowSize = option.lowSize ?? 8
+  const convertSequence = option.convertSequence ?? 'rg'
 
-  for (let x = 0; x < option.DCTSize; x++) {
-    imgarray[x] = new Array(option.DCTSize)
-    for (let y = 0; y < option.DCTSize; y++) {
+  imgConvert(img, DCTSize, DCTSize, convertSequence)
+
+  const imgarray: number[][] = new Array(DCTSize)
+
+  for (let x = 0; x < DCTSize; x++) {
+    imgarray[x] = new Array(DCTSize)
+    for (let y = 0; y < DCTSize; y++) {
       imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
     }
   }
-  const dct = applyDCT(imgarray, option.lowSize, option.DCTSize)
+  const dct = applyDCT(imgarray, lowSize, DCTSize)
 
   let sum = 0
-  for (let x = 0; x < option.lowSize; x++) {
-    for (let y = 0; y < option.lowSize; y++) {
+  for (let x = 0; x < lowSize; x++) {
+    for (let y = 0; y < lowSize; y++) {
       sum += dct[x][y]
     }
   }
-  const avg = sum / (option.lowSize * option.lowSize)
+  const avg = sum / (lowSize * lowSize)
 
   let result = ''
-  for (let x = 0; x < option.lowSize; x++) {
-    for (let y = 0; y < option.lowSize; y++) {
+  for (let x = 0; x < lowSize; x++) {
+    for (let y = 0; y < lowSize; y++) {
       result += (dct[x][y] > avg ? '1' : '0')
     }
   }

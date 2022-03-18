@@ -1,17 +1,37 @@
 import Jimp from 'jimp'
 import ImgHash from './ImgHash'
+import { imgConvert } from './util'
 const MHASH_SAMPLE_SIZE = 8
+
+/**
+ * mhash option
+ */
+export interface MHASH_OPTION{
+  /**
+   * resize square size (=8)
+   */
+  sampleSize?: number
+  /**
+   * convert sequence (=rg)
+   * r: resize
+   * g: glayscale
+   */
+  convertSequence?: 'rg' | 'gr'
+}
 
 /**
  * Median Hash
  * @param img Jimp object (**Destroyable**)
- * @param sampleSize resize square size(=8)
+ * @param option
  * @returns ahash
  */
-const mhash = (img: Jimp, sampleSize: number = MHASH_SAMPLE_SIZE) => {
-  img
-    .resize(sampleSize, sampleSize)
-    .grayscale()
+const mhash = (img: Jimp, option: MHASH_OPTION = {}) => {
+  const sampleSize = option.sampleSize ?? MHASH_SAMPLE_SIZE
+
+  const convertSequence = option.convertSequence ?? 'rg'
+
+  imgConvert(img, sampleSize, sampleSize, convertSequence)
+
   const imgarray: number[][] = new Array(sampleSize)
   const sortedPx: number[] = []
 
