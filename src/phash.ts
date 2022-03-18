@@ -1,5 +1,5 @@
 import Jimp from 'jimp'
-import ImgHash from "./ImgHash";
+import ImgHash from './ImgHash'
 
 /**
  * phash option
@@ -23,38 +23,38 @@ const DCTCoefficients = (n: number) => (n === 0 ? INV_SQRT_2 : 1)
 const MemoCOS: {[keyof: number]: number[][]} = {}
 
 const initCOS = (N: number) => {
-  if(MemoCOS[N]) return MemoCOS[N]
-  MemoCOS[N] = new Array(N);
+  if (MemoCOS[N]) return MemoCOS[N]
+  MemoCOS[N] = new Array(N)
   const cosines = MemoCOS[N]
   for (let k = 0; k < N; k++) {
-    cosines[k] = new Array(N);
+    cosines[k] = new Array(N)
     const t = ((2 * k + 1) / (2.0 * N)) * Math.PI
     for (let n = 0; n < N; n++) {
-      cosines[k][n] = Math.cos(t * n);
+      cosines[k][n] = Math.cos(t * n)
     }
   }
-  return cosines;
+  return cosines
 }
 
-let COS = initCOS(PHASH_SAMPLE_SIZE);
+let COS = initCOS(PHASH_SAMPLE_SIZE)
 
 const applyDCT = (f: number[][], size: number, sampleSize: number) => {
-  COS = initCOS(sampleSize);
+  COS = initCOS(sampleSize)
 
-  const F: number[][] = new Array(size);
+  const F: number[][] = new Array(size)
   for (let u = 0; u < size; u++) {
-    F[u] = new Array(size);
+    F[u] = new Array(size)
     for (let v = 0; v < size; v++) {
-      let sum = 0;
+      let sum = 0
       for (let i = 0; i < sampleSize; i++) {
         for (let j = 0; j < sampleSize; j++) {
-          sum += COS[i][u] * COS[j][v] * f[i][j];
+          sum += COS[i][u] * COS[j][v] * f[i][j]
         }
       }
-      F[u][v] = sum * (DCTCoefficients(u) * DCTCoefficients(v)) / 4;
+      F[u][v] = sum * (DCTCoefficients(u) * DCTCoefficients(v)) / 4
     }
   }
-  return F;
+  return F
 }
 
 /**
@@ -63,31 +63,31 @@ const applyDCT = (f: number[][], size: number, sampleSize: number) => {
  * @param option DCT Sampling Square size(=32) & Low frequencies Square Size(=8) O(DCTSize^2 * lowSize^2)
  * @returns phash
  */
-const phash = (img: Jimp, option: PHASH_SAMPLING_SIZE = {DCTSize: 32, lowSize: 8}) => {
+const phash = (img: Jimp, option: PHASH_SAMPLING_SIZE = { DCTSize: 32, lowSize: 8 }) => {
   img
     .resize(option.DCTSize, option.DCTSize)
     .grayscale()
   const imgarray: number[][] = new Array(option.DCTSize)
 
-  for(let x = 0; x < option.DCTSize; x++){
+  for (let x = 0; x < option.DCTSize; x++) {
     imgarray[x] = new Array(option.DCTSize)
-    for(let y = 0; y < option.DCTSize; y++){
-      imgarray[x][y] = (img.getPixelColor(x, y)>>16) & 0xff
+    for (let y = 0; y < option.DCTSize; y++) {
+      imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
     }
   }
   const dct = applyDCT(imgarray, option.lowSize, option.DCTSize)
 
   let sum = 0
-  for(let x = 0; x < option.lowSize; x++){
-    for(let y = 0; y < option.lowSize; y++){
+  for (let x = 0; x < option.lowSize; x++) {
+    for (let y = 0; y < option.lowSize; y++) {
       sum += dct[x][y]
     }
   }
   const avg = sum / (option.lowSize * option.lowSize)
 
   let result = ''
-  for(let x = 0; x < option.lowSize; x++){
-    for(let y = 0; y < option.lowSize; y++){
+  for (let x = 0; x < option.lowSize; x++) {
+    for (let y = 0; y < option.lowSize; y++) {
       result += (dct[x][y] > avg ? '1' : '0')
     }
   }

@@ -1,7 +1,7 @@
 import phash from '../src/phash'
 import jimp from 'jimp'
 
-test("#phash", async () => {
+test('#phash', async () => {
   const target = [
     './img/img_a_196.jpg',
     './img/img_a_256.jpg',
@@ -11,11 +11,12 @@ test("#phash", async () => {
   ]
   const imgs = await Promise.all(target.map(address => jimp.read(address)))
   const hash = imgs.map(img => phash(img.clone()))
+  // console.log(hash.map(x => x.hex))
   const score:number[][] = new Array(target.length)
-  for(let i=0; i< hash.length; i++){
+  for (let i = 0; i < hash.length; i++) {
     expect(hash[i].bit64).toBe(imgs[i].hash())
     score[i] = new Array(target.length)
-    for(let j=0; j< hash.length; j++){
+    for (let j = 0; j < hash.length; j++) {
       score[i][j] = hash[i].degreeOfSimilarity(hash[j])
     }
   }

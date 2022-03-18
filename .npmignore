@@ -1,4 +1,7 @@
 img/
 src/
-tsconfig.json
+test/
 .eslintrc.yml
+jest.config.ts
+readme.md
+tsconfig.json

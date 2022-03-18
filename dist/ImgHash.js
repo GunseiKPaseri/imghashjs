@@ -15,7 +15,7 @@ export default class ImgHash {
         this.type = type;
         if (typeof byte8 === 'string') {
             if (hextype === '64byte' || hextype === 'bin') {
-                const bin = (hextype === 'bin' ? byte8 : byte8.split('').map(x => { var _a; return ((_a = table[x]) !== null && _a !== void 0 ? _a : 0).toString(2).padStart(6, "0"); }).join(''));
+                const bin = (hextype === 'bin' ? byte8 : byte8.split('').map(x => { var _a; return ((_a = table[x]) !== null && _a !== void 0 ? _a : 0).toString(2).padStart(6, '0'); }).join(''));
                 this.byte = (_b = (_a = bin.padStart(Math.ceil(bin.length / 8) * 8, '0').match(/.{8}/g)) === null || _a === void 0 ? void 0 : _a.map(x => parseInt(x, 2))) !== null && _b !== void 0 ? _b : [];
             }
             else {
@@ -31,13 +31,19 @@ export default class ImgHash {
      * base 2 hash string
      */
     get bin() {
-        return this.byte.map(x => x.toString(2).padStart(8, "0")).join('');
+        return this.byte.map(x => x.toString(2).padStart(8, '0')).join('');
     }
     /**
      * base 16 hash string
      */
     get hex() {
-        return this.byte.map(x => x.toString(16).padStart(2, "0")).join('');
+        return this.byte.map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+    /**
+     * get hash string
+     */
+    toString() {
+        return this.hex;
     }
     /**
      * base 64 hash string
@@ -45,7 +51,7 @@ export default class ImgHash {
      */
     get bit64() {
         var _a, _b;
-        return (_b = (_a = this.bin.padStart(Math.ceil(this.byte.length * 8 / 6) * 6, "0").match(/.{6}/g)) === null || _a === void 0 ? void 0 : _a.map(x => alphabet[parseInt(x, 2)]).join('')) !== null && _b !== void 0 ? _b : '';
+        return (_b = (_a = this.bin.padStart(Math.ceil(this.byte.length * 8 / 6) * 6, '0').match(/.{6}/g)) === null || _a === void 0 ? void 0 : _a.map(x => alphabet[parseInt(x, 2)]).join('')) !== null && _b !== void 0 ? _b : '';
     }
     /**
      * Hash Uint8Array

@@ -1,4 +1,4 @@
-import ImgHash from "./ImgHash";
+import ImgHash from './ImgHash';
 const DHASH_SAMPLE_SIZE = 8;
 /**
  * Distance Hash

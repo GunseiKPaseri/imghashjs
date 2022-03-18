@@ -15,10 +15,10 @@ const ahash = (img: Jimp, sampleSize: number = AHASH_SAMPLE_SIZE) => {
   const imgarray: number[][] = new Array(sampleSize)
 
   let sum = 0
-  for(let x = 0; x < sampleSize; x++){
+  for (let x = 0; x < sampleSize; x++) {
     imgarray[x] = new Array(sampleSize)
-    for(let y = 0; y < sampleSize; y++){
-      imgarray[x][y] = (img.getPixelColor(x, y)>>16) & 0xff
+    for (let y = 0; y < sampleSize; y++) {
+      imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
       sum += imgarray[x][y]
     }
   }
@@ -26,8 +26,8 @@ const ahash = (img: Jimp, sampleSize: number = AHASH_SAMPLE_SIZE) => {
 
   let result = ''
 
-  for(let x = 0; x < sampleSize; x++){
-    for(let y = 0; y < sampleSize; y++){
+  for (let x = 0; x < sampleSize; x++) {
+    for (let y = 0; y < sampleSize; y++) {
       result += (imgarray[x][y] > avg ? '1' : '0')
     }
   }

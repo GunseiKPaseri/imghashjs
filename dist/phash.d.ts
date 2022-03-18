@@ -1,5 +1,5 @@
 import Jimp from 'jimp';
-import ImgHash from "./ImgHash";
+import ImgHash from './ImgHash';
 /**
  * phash option
  */

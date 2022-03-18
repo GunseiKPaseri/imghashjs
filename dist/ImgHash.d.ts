@@ -20,6 +20,10 @@ export default class ImgHash {
      */
     get hex(): string;
     /**
+     * get hash string
+     */
+    toString(): string;
+    /**
      * base 64 hash string
      * (This is the same format as the `jimpimg.hash()`)
      */
