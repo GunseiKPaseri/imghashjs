@@ -13,16 +13,38 @@ export interface DHASH_OPTION{
    */
   sampleSize?: number
   /**
-   * do you calc different horizontally? (=true)
+   * diffcomputing `"horizontally" | "vertically"`
    */
-  diffComputesHorizontally?: boolean
+  diffCompute?: 'horizontally' | 'vertically'
   /**
    * convert sequence (=rg)
    * r: resize
    * g: glayscale
    */
   convertSequence?: 'rg' | 'gr'
+  /**
+   * bytereading `"horizontally" | "vertically"`
+   */
+  byteReader?: 'horizontally' | 'vertically'
+  /**
+   * `left: (left > right)`, `right: (left < right)`
+   */
+  larger?: 'left' | 'right'
 }
+
+/**
+ * PyPI ImgHash (https://pypi.org/project/imghash/)
+ * `imghash.average_hash`
+ */
+const PyPIImgHash: DHASH_OPTION = {
+  convertSequence: 'gr',
+  larger: 'right',
+  byteReader: 'vertically'
+}
+/**
+ * AHASH option preset
+ */
+export const DHASH_PRESET = { PyPIImgHash }
 
 /**
  * Distance Hash
@@ -32,7 +54,9 @@ export interface DHASH_OPTION{
  */
 const dhash = (img: Jimp, option: DHASH_OPTION = {}) => {
   const sampleSize = option.sampleSize ?? DHASH_SAMPLE_SIZE
-  const diffComputesHorizontally = option.diffComputesHorizontally ?? true
+  const diffComputesHorizontally = option.diffCompute !== 'vertically'
+  const isByteReadingHorizontally = option.byteReader !== 'vertically'
+  const isGT = option.larger === 'left'
 
   const convertSequence = option.convertSequence ?? 'rg'
 
@@ -50,13 +74,19 @@ const dhash = (img: Jimp, option: DHASH_OPTION = {}) => {
     }
   }
 
+  // console.log(imgarray)
   let result = ''
   for (let x = 0; x < sampleSize; x++) {
     for (let y = 0; y < sampleSize; y++) {
-      result += (imgarray[x][y] > imgarray[x + h][y + v] ? '1' : '0')
+      result += (
+        (isByteReadingHorizontally
+          ? (isGT ? imgarray[x][y] > imgarray[x + h][y + v] : imgarray[x][y] < imgarray[x + h][y + v])
+          : (isGT ? imgarray[y][x] > imgarray[y + h][x + v] : imgarray[y][x] < imgarray[y + h][x + v])
+        )
+          ? '1'
+          : '0')
     }
   }
-
   return new ImgHash('dhash', result, 'bin')
 }
 

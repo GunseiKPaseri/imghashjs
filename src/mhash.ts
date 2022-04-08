@@ -1,6 +1,6 @@
 import Jimp from 'jimp'
 import ImgHash from './ImgHash'
-import { imgConvert } from './util'
+import { imgConvert, median } from './util'
 const MHASH_SAMPLE_SIZE = 8
 
 /**
@@ -33,28 +33,20 @@ const mhash = (img: Jimp, option: MHASH_OPTION = {}) => {
   imgConvert(img, sampleSize, sampleSize, convertSequence)
 
   const imgarray: number[][] = new Array(sampleSize)
-  const sortedPx: number[] = []
 
   for (let x = 0; x < sampleSize; x++) {
     imgarray[x] = new Array(sampleSize)
     for (let y = 0; y < sampleSize; y++) {
       imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
-      sortedPx.push(imgarray[x][y])
     }
   }
-  sortedPx.sort()
-  const allPx = sampleSize * sampleSize
-  const median = (
-    allPx % 2 === 1
-      ? sortedPx[allPx / 2 | 0]
-      : (sortedPx[allPx / 2 - 1] + sortedPx[allPx / 2]) / 2
-  )
+  const med = median(imgarray)
 
   let result = ''
 
   for (let x = 0; x < sampleSize; x++) {
     for (let y = 0; y < sampleSize; y++) {
-      result += (imgarray[x][y] > median ? '1' : '0')
+      result += (imgarray[x][y] > med ? '1' : '0')
     }
   }
   return new ImgHash('ahash', result, 'bin')

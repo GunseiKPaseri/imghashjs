@@ -1,8 +1,9 @@
 {
   "name": "imghash-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "imghash on browser",
   "main": "./dist/index.js",
+  "type": "module",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
