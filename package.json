@@ -1,11 +1,10 @@
 {
   "name": "imghash-js",
-  "version": "0.0.3-alpha.3",
+  "version": "0.0.3-alpha.4",
   "description": "imghash on browser",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
-  "type": "module",
   "publishConfig": {
     "access": "public"
   },
