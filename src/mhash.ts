@@ -1,6 +1,6 @@
 import Jimp from 'jimp'
-import ImgHash from './ImgHash'
-import { imgConvert, median } from './util'
+import ImgHash from './ImgHash.js'
+import { imgConvert, median } from './util.js'
 const MHASH_SAMPLE_SIZE = 8
 
 /**

@@ -1,5 +1,5 @@
-import ImgHash from './ImgHash';
-import { imgConvert } from './util';
+import ImgHash from './ImgHash.js';
+import { imgConvert } from './util.js';
 const PHASH_SAMPLE_SIZE = 32;
 const INV_SQRT_2 = 1 / Math.sqrt(2.0);
 const DCTCoefficients = (n) => (n === 0 ? INV_SQRT_2 : 1);

@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DHASH_PRESET = void 0;
 const tslib_1 = require("tslib");
-const ImgHash_1 = tslib_1.__importDefault(require("./ImgHash"));
-const util_1 = require("./util");
+const ImgHash_js_1 = tslib_1.__importDefault(require("./ImgHash.js"));
+const util_js_1 = require("./util.js");
 const DHASH_SAMPLE_SIZE = 8;
 /**
  * PyPI ImgHash (https://pypi.org/project/imghash/)
@@ -33,7 +33,7 @@ const dhash = (img, option = {}) => {
     const convertSequence = (_b = option.convertSequence) !== null && _b !== void 0 ? _b : 'rg';
     const h = (diffComputesHorizontally ? 1 : 0);
     const v = (diffComputesHorizontally ? 0 : 1);
-    (0, util_1.imgConvert)(img, sampleSize + h, sampleSize + v, convertSequence);
+    (0, util_js_1.imgConvert)(img, sampleSize + h, sampleSize + v, convertSequence);
     const imgarray = new Array(sampleSize + h);
     for (let x = 0; x < sampleSize + h; x++) {
         imgarray[x] = new Array(sampleSize + v);
@@ -52,7 +52,7 @@ const dhash = (img, option = {}) => {
                 : '0');
         }
     }
-    return new ImgHash_1.default('dhash', result, 'bin');
+    return new ImgHash_js_1.default('dhash', result, 'bin');
 };
 exports.default = dhash;
 //# sourceMappingURL=dhash.js.map

@@ -93,7 +93,7 @@ export default {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  preset: 'ts-jest'
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -108,7 +108,7 @@ export default {
   // resetModules: false,
 
   // A path to a custom resolver
-  // resolver: undefined,
+  resolver: 'ts-jest-resolver'
 
   // Automatically restore mock state and implementation before every test
   // restoreMocks: false,

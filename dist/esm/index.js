@@ -1,7 +1,7 @@
-import ahash, { AHASH_PRESET } from './ahash';
-import dhash from './dhash';
-import phash from './phash';
-import mhash from './mhash';
-import ImgHash from './ImgHash';
+import ahash, { AHASH_PRESET } from './ahash.js';
+import dhash from './dhash.js';
+import phash from './phash.js';
+import mhash from './mhash.js';
+import ImgHash from './ImgHash.js';
 export { ahash, dhash, phash, mhash, ImgHash, AHASH_PRESET };
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 import Jimp from 'jimp'
-import ImgHash from './ImgHash'
-import { imgConvert } from './util'
+import ImgHash from './ImgHash.js'
+import { imgConvert } from './util.js'
 
 /**
  * phash option

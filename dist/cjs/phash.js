@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-const ImgHash_1 = tslib_1.__importDefault(require("./ImgHash"));
-const util_1 = require("./util");
+const ImgHash_js_1 = tslib_1.__importDefault(require("./ImgHash.js"));
+const util_js_1 = require("./util.js");
 const PHASH_SAMPLE_SIZE = 32;
 const INV_SQRT_2 = 1 / Math.sqrt(2.0);
 const DCTCoefficients = (n) => (n === 0 ? INV_SQRT_2 : 1);
@@ -50,7 +50,7 @@ const phash = (img, option = {}) => {
     const DCTSize = (_a = option.DCTSize) !== null && _a !== void 0 ? _a : 32;
     const lowSize = (_b = option.lowSize) !== null && _b !== void 0 ? _b : 8;
     const convertSequence = (_c = option.convertSequence) !== null && _c !== void 0 ? _c : 'rg';
-    (0, util_1.imgConvert)(img, DCTSize, DCTSize, convertSequence);
+    (0, util_js_1.imgConvert)(img, DCTSize, DCTSize, convertSequence);
     const imgarray = new Array(DCTSize);
     for (let x = 0; x < DCTSize; x++) {
         imgarray[x] = new Array(DCTSize);
@@ -72,7 +72,7 @@ const phash = (img, option = {}) => {
             result += (dct[x][y] > avg ? '1' : '0');
         }
     }
-    return new ImgHash_1.default('phash', result, 'bin');
+    return new ImgHash_js_1.default('phash', result, 'bin');
 };
 exports.default = phash;
 //# sourceMappingURL=phash.js.map

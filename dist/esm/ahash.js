@@ -1,5 +1,5 @@
-import ImgHash from './ImgHash';
-import { average, imgConvert } from './util';
+import ImgHash from './ImgHash.js';
+import { average, imgConvert } from './util.js';
 const AHASH_SAMPLE_SIZE = 8;
 /**
  * PyPI ImgHash (https://pypi.org/project/imghash/)
