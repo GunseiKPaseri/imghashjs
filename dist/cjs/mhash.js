@@ -19,7 +19,7 @@ const mhash = (img, option = {}) => {
     for (let x = 0; x < sampleSize; x++) {
         imgarray[x] = new Array(sampleSize);
         for (let y = 0; y < sampleSize; y++) {
-            imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff;
+            imgarray[x][y] = (img.getPixelRGB(x, y) >> 16) & 0xff;
         }
     }
     const med = (0, util_js_1.median)(imgarray);

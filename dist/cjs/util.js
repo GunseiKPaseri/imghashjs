@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.representativeValue = exports.median = exports.average = exports.imgConvert = void 0;
-const tslib_1 = require("tslib");
-const jimp_1 = tslib_1.__importDefault(require("jimp"));
 /**
  * comvert image
  * @param img Jimp img object
@@ -12,14 +10,12 @@ const jimp_1 = tslib_1.__importDefault(require("jimp"));
  */
 const imgConvert = (img, w, h, sequence) => {
     if (sequence === 'rg') {
-        img
-            .resize(w, h, jimp_1.default.RESIZE_BICUBIC)
-            .grayscale();
+        img.resize(w, h, 'BICUBIC');
+        img.grayscale();
     }
     else {
-        img
-            .grayscale()
-            .resize(w, h, jimp_1.default.RESIZE_BICUBIC);
+        img.grayscale();
+        img.resize(w, h, 'BICUBIC');
     }
 };
 exports.imgConvert = imgConvert;

@@ -1,4 +1,4 @@
-import Jimp from 'jimp'
+import ImgClass from './ImgClass/ImgClass.js'
 import ImgHash from './ImgHash.js'
 import { imgConvert } from './util.js'
 
@@ -52,7 +52,7 @@ export const DHASH_PRESET = { PyPIImgHash }
  * @param option
  * @returns dhash
  */
-const dhash = (img: Jimp, option: DHASH_OPTION = {}) => {
+const dhash = (img: ImgClass, option: DHASH_OPTION = {}) => {
   const sampleSize = option.sampleSize ?? DHASH_SAMPLE_SIZE
   const diffComputesHorizontally = option.diffCompute !== 'vertically'
   const isByteReadingHorizontally = option.byteReader !== 'vertically'
@@ -70,7 +70,7 @@ const dhash = (img: Jimp, option: DHASH_OPTION = {}) => {
   for (let x = 0; x < sampleSize + h; x++) {
     imgarray[x] = new Array(sampleSize + v)
     for (let y = 0; y < sampleSize + v; y++) {
-      imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
+      imgarray[x][y] = (img.getPixelRGB(x, y) >> 16) & 0xff
     }
   }
 

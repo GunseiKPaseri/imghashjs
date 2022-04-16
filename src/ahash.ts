@@ -1,4 +1,4 @@
-import Jimp from 'jimp'
+import ImgClass from './ImgClass/ImgClass.js'
 import ImgHash from './ImgHash.js'
 import { average, imgConvert } from './util.js'
 const AHASH_SAMPLE_SIZE = 8
@@ -43,7 +43,7 @@ export const AHASH_PRESET = { PyPIImgHash }
  * @param option
  * @returns ahash
  */
-const ahash = (img: Jimp, option: AHASH_OPTION = {}) => {
+const ahash = (img: ImgClass, option: AHASH_OPTION = {}) => {
   const sampleSize = option.sampleSize ?? AHASH_SAMPLE_SIZE
   const convertSequence = option.convertSequence ?? 'rg'
   const isByteReadingHorizontally = option.byteReader !== 'vertically'
@@ -55,7 +55,7 @@ const ahash = (img: Jimp, option: AHASH_OPTION = {}) => {
   for (let x = 0; x < sampleSize; x++) {
     imgarray[x] = new Array(sampleSize)
     for (let y = 0; y < sampleSize; y++) {
-      imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
+      imgarray[x][y] = (img.getPixelRGB(x, y) >> 16) & 0xff
     }
   }
   const avg = average(imgarray)

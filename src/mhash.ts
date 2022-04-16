@@ -1,4 +1,4 @@
-import Jimp from 'jimp'
+import ImgClass from './ImgClass/ImgClass.js'
 import ImgHash from './ImgHash.js'
 import { imgConvert, median } from './util.js'
 const MHASH_SAMPLE_SIZE = 8
@@ -25,7 +25,7 @@ export interface MHASH_OPTION{
  * @param option
  * @returns ahash
  */
-const mhash = (img: Jimp, option: MHASH_OPTION = {}) => {
+const mhash = (img: ImgClass, option: MHASH_OPTION = {}) => {
   const sampleSize = option.sampleSize ?? MHASH_SAMPLE_SIZE
 
   const convertSequence = option.convertSequence ?? 'rg'
@@ -37,7 +37,7 @@ const mhash = (img: Jimp, option: MHASH_OPTION = {}) => {
   for (let x = 0; x < sampleSize; x++) {
     imgarray[x] = new Array(sampleSize)
     for (let y = 0; y < sampleSize; y++) {
-      imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
+      imgarray[x][y] = (img.getPixelRGB(x, y) >> 16) & 0xff
     }
   }
   const med = median(imgarray)

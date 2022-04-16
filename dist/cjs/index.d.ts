@@ -3,5 +3,7 @@ import dhash, { DHASH_OPTION } from './dhash.js';
 import phash, { PHASH_OPTION } from './phash.js';
 import mhash, { MHASH_OPTION } from './mhash.js';
 import ImgHash from './ImgHash.js';
-export { ahash, dhash, phash, mhash, ImgHash, AHASH_OPTION, AHASH_PRESET, DHASH_OPTION, PHASH_OPTION, MHASH_OPTION };
+import JimpImgClass from './ImgClass/JimpImgClass.js';
+import BrowserJimpImgClass from './ImgClass/BrowserJimpImgClass.js';
+export { ahash, dhash, phash, mhash, ImgHash, AHASH_OPTION, AHASH_PRESET, DHASH_OPTION, PHASH_OPTION, MHASH_OPTION, JimpImgClass, BrowserJimpImgClass };
 //# sourceMappingURL=index.d.ts.map

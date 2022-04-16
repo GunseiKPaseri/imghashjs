@@ -1,4 +1,4 @@
-import Jimp from 'jimp';
+import ImgClass from './ImgClass/ImgClass.js';
 import ImgHash from './ImgHash.js';
 /**
  * dhash option
@@ -39,6 +39,6 @@ export declare const DHASH_PRESET: {
  * @param option
  * @returns dhash
  */
-declare const dhash: (img: Jimp, option?: DHASH_OPTION) => ImgHash;
+declare const dhash: (img: ImgClass, option?: DHASH_OPTION) => ImgHash;
 export default dhash;
 //# sourceMappingURL=dhash.d.ts.map

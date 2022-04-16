@@ -1,5 +1,5 @@
 import ahash, { AHASH_PRESET } from '../src/ahash'
-import jimp from 'jimp'
+import JimpImgClass from '../src/ImgClass/JimpImgClass'
 
 describe('#ahash', () => {
   test('can calc', async () => {
@@ -9,7 +9,7 @@ describe('#ahash', () => {
       './img/img_a_256_dirty.jpg',
       './img/img_b_256.jpg'
     ]
-    const imgs = await Promise.all(target.map(address => jimp.read(address)))
+    const imgs = await Promise.all(target.map(address => (new JimpImgClass()).init(address)))
     const hash = imgs.map(img => ahash(img))
     console.log(hash.map(x => x.hex))
     const score:number[][] = new Array(target.length)
@@ -32,7 +32,7 @@ describe('#ahash', () => {
       ['./img/img_a_256_dirty.jpg', { PyPIImgHash: 'fffffffcf8000000' }],
       ['./img/img_b_256.jpg', { PyPIImgHash: 'ffffffff00000000' }]
     ]
-    const imgs = await Promise.all(target.map(obj => jimp.read(obj[0])))
+    const imgs = await Promise.all(target.map(obj => (new JimpImgClass()).init(obj[0])))
     for (let i = 0; i < imgs.length; i++) {
       const PyPIImgHash = ahash(imgs[i], AHASH_PRESET.PyPIImgHash)
       expect(PyPIImgHash.hex).toBe(target[i][1].PyPIImgHash)

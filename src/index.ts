@@ -3,6 +3,8 @@ import dhash, { DHASH_OPTION } from './dhash.js'
 import phash, { PHASH_OPTION } from './phash.js'
 import mhash, { MHASH_OPTION } from './mhash.js'
 import ImgHash from './ImgHash.js'
+import JimpImgClass from './ImgClass/JimpImgClass.js'
+import BrowserJimpImgClass from './ImgClass/BrowserJimpImgClass.js'
 
 export {
   ahash,
@@ -14,5 +16,7 @@ export {
   AHASH_PRESET,
   DHASH_OPTION,
   PHASH_OPTION,
-  MHASH_OPTION
+  MHASH_OPTION,
+  JimpImgClass,
+  BrowserJimpImgClass
 }

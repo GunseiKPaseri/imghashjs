@@ -1,4 +1,4 @@
-import Jimp from 'jimp'
+import ImgClass from './ImgClass/ImgClass.js'
 import ImgHash from './ImgHash.js'
 import { imgConvert } from './util.js'
 
@@ -70,7 +70,7 @@ const applyDCT = (f: number[][], size: number, sampleSize: number) => {
  * @param option
  * @returns phash
  */
-const phash = (img: Jimp, option: PHASH_OPTION = {}) => {
+const phash = (img: ImgClass, option: PHASH_OPTION = {}) => {
   const DCTSize = option.DCTSize ?? 32
   const lowSize = option.lowSize ?? 8
   const convertSequence = option.convertSequence ?? 'rg'
@@ -82,7 +82,7 @@ const phash = (img: Jimp, option: PHASH_OPTION = {}) => {
   for (let x = 0; x < DCTSize; x++) {
     imgarray[x] = new Array(DCTSize)
     for (let y = 0; y < DCTSize; y++) {
-      imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff
+      imgarray[x][y] = (img.getPixelRGB(x, y) >> 16) & 0xff
     }
   }
   const dct = applyDCT(imgarray, lowSize, DCTSize)

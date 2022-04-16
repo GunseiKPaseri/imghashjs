@@ -1,4 +1,3 @@
-import Jimp from 'jimp';
 /**
  * comvert image
  * @param img Jimp img object
@@ -8,14 +7,12 @@ import Jimp from 'jimp';
  */
 export const imgConvert = (img, w, h, sequence) => {
     if (sequence === 'rg') {
-        img
-            .resize(w, h, Jimp.RESIZE_BICUBIC)
-            .grayscale();
+        img.resize(w, h, 'BICUBIC');
+        img.grayscale();
     }
     else {
-        img
-            .grayscale()
-            .resize(w, h, Jimp.RESIZE_BICUBIC);
+        img.grayscale();
+        img.resize(w, h, 'BICUBIC');
     }
 };
 /**

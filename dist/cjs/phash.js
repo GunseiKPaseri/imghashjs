@@ -55,7 +55,7 @@ const phash = (img, option = {}) => {
     for (let x = 0; x < DCTSize; x++) {
         imgarray[x] = new Array(DCTSize);
         for (let y = 0; y < DCTSize; y++) {
-            imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff;
+            imgarray[x][y] = (img.getPixelRGB(x, y) >> 16) & 0xff;
         }
     }
     const dct = applyDCT(imgarray, lowSize, DCTSize);

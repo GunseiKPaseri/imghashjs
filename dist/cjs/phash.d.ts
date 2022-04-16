@@ -1,4 +1,4 @@
-import Jimp from 'jimp';
+import ImgClass from './ImgClass/ImgClass.js';
 import ImgHash from './ImgHash.js';
 /**
  * phash option
@@ -25,6 +25,6 @@ export interface PHASH_OPTION {
  * @param option
  * @returns phash
  */
-declare const phash: (img: Jimp, option?: PHASH_OPTION) => ImgHash;
+declare const phash: (img: ImgClass, option?: PHASH_OPTION) => ImgHash;
 export default phash;
 //# sourceMappingURL=phash.d.ts.map

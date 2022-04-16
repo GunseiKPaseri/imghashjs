@@ -1,5 +1,5 @@
 import mhash from '../src/mhash'
-import jimp from 'jimp'
+import JimpImgClass from '../src/ImgClass/JimpImgClass'
 
 test('#mhash', async () => {
   const target = [
@@ -8,7 +8,7 @@ test('#mhash', async () => {
     './img/img_a_256_dirty.jpg',
     './img/img_b_256.jpg'
   ]
-  const imgs = await Promise.all(target.map(address => jimp.read(address)))
+  const imgs = await Promise.all(target.map(address => (new JimpImgClass()).init(address)))
   const hash = imgs.map(img => mhash(img))
   const score:number[][] = new Array(target.length)
   for (let i = 0; i < hash.length; i++) {

@@ -34,7 +34,7 @@ const dhash = (img, option = {}) => {
     for (let x = 0; x < sampleSize + h; x++) {
         imgarray[x] = new Array(sampleSize + v);
         for (let y = 0; y < sampleSize + v; y++) {
-            imgarray[x][y] = (img.getPixelColor(x, y) >> 16) & 0xff;
+            imgarray[x][y] = (img.getPixelRGB(x, y) >> 16) & 0xff;
         }
     }
     // console.log(imgarray)

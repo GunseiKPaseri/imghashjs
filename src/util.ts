@@ -1,4 +1,4 @@
-import Jimp from 'jimp'
+import ImgClass from './ImgClass/ImgClass'
 
 /**
  * comvert image
@@ -7,15 +7,13 @@ import Jimp from 'jimp'
  * @param h height
  * @param sequence 'rg'(resize->grayscale) 'gr'(grayscale->resize)
  */
-export const imgConvert = (img: Jimp, w: number, h: number, sequence: 'rg' | 'gr') => {
+export const imgConvert = (img: ImgClass, w: number, h: number, sequence: 'rg' | 'gr') => {
   if (sequence === 'rg') {
-    img
-      .resize(w, h, Jimp.RESIZE_BICUBIC)
-      .grayscale()
+    img.resize(w, h, 'BICUBIC')
+    img.grayscale()
   } else {
-    img
-      .grayscale()
-      .resize(w, h, Jimp.RESIZE_BICUBIC)
+    img.grayscale()
+    img.resize(w, h, 'BICUBIC')
   }
 }
 
