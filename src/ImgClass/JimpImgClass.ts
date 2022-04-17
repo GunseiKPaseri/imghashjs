@@ -15,22 +15,27 @@ export default class JimpImgClass implements ImgClass {
   }
 
   getPixelRGB (x: number, y: number): number {
-    if (!this.img) throw new Error('img hasn\'t been loaded yet')
+    if (!this.img) throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.')
     return this.img.getPixelColor(x, y)
   }
 
   resize (width: number, height: number, algorithm: 'BICUBIC'): void {
-    if (!this.img) throw new Error('img hasn\'t been loaded yet')
+    if (!this.img) throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.')
     this.img.resize(width, height, Jimp.RESIZE_BICUBIC)
   }
 
   grayscale (): void {
-    if (!this.img) throw new Error('img hasn\'t been loaded yet')
+    if (!this.img) throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.')
     this.img.grayscale()
   }
 
+  clone (): JimpImgClass {
+    if (!this.img) throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.')
+    return new JimpImgClass(this.img.clone())
+  }
+
   raw () {
-    if (!this.img) throw new Error('img hasn\'t been loaded yet')
+    if (!this.img) throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.')
     return this.img
   }
 }
