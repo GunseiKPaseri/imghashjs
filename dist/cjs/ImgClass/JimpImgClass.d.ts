@@ -7,6 +7,7 @@ export default class JimpImgClass implements ImgClass {
     getPixelRGB(x: number, y: number): number;
     resize(width: number, height: number, algorithm: 'BICUBIC'): void;
     grayscale(): void;
+    clone(): JimpImgClass;
     raw(): Jimp;
 }
 //# sourceMappingURL=JimpImgClass.d.ts.map

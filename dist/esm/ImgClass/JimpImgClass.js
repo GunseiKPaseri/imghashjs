@@ -12,22 +12,27 @@ export default class JimpImgClass {
     }
     getPixelRGB(x, y) {
         if (!this.img)
-            throw new Error('img hasn\'t been loaded yet');
+            throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.');
         return this.img.getPixelColor(x, y);
     }
     resize(width, height, algorithm) {
         if (!this.img)
-            throw new Error('img hasn\'t been loaded yet');
+            throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.');
         this.img.resize(width, height, Jimp.RESIZE_BICUBIC);
     }
     grayscale() {
         if (!this.img)
-            throw new Error('img hasn\'t been loaded yet');
+            throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.');
         this.img.grayscale();
+    }
+    clone() {
+        if (!this.img)
+            throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.');
+        return new JimpImgClass(this.img.clone());
     }
     raw() {
         if (!this.img)
-            throw new Error('img hasn\'t been loaded yet');
+            throw new Error('img hasn\'t been loaded yet. You should initialize by `.init()`.');
         return this.img;
     }
 }
