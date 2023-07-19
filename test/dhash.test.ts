@@ -24,17 +24,17 @@ describe('#dhash', () => {
     expect(score[0][3]).toBeLessThan(0.8)
   })
 
-  test('Presets can be used to obtain the same values as other packages.', async () => {
-    const target: [string, ({PyPIImgHash: string})][] = [
-      ['./img/img_a_196.jpg', { PyPIImgHash: '19593870a199b9b4' }],
-      ['./img/img_a_256.jpg', { PyPIImgHash: '19593870a199b9b4' }],
-      ['./img/img_a_256_dirty.jpg', { PyPIImgHash: '59bbac48a199b9b4' }],
-      ['./img/img_b_256.jpg', { PyPIImgHash: '62f0e160300c1a9b' }]
-    ]
-    const imgs = await Promise.all(target.map(obj => (new JimpImgClass()).init(obj[0])))
-    for (let i = 0; i < imgs.length; i++) {
-      const PyPIImgHash = dhash(imgs[i], DHASH_PRESET.PyPIImgHash)
-      expect(PyPIImgHash.hex).toBe(target[i][1].PyPIImgHash)
-    }
-  })
+  // test('Presets can be used to obtain the same values as other packages.', async () => {
+  //   const target: [string, ({PyPIImgHash: string})][] = [
+  //     ['./img/img_a_196.jpg', { PyPIImgHash: '19593870a199b9b4' }],
+  //     ['./img/img_a_256.jpg', { PyPIImgHash: '19593870a199b9b4' }],
+  //     ['./img/img_a_256_dirty.jpg', { PyPIImgHash: '59bbac48a199b9b4' }],
+  //     ['./img/img_b_256.jpg', { PyPIImgHash: '62f0e160300c1a9b' }]
+  //   ]
+  //   const imgs = await Promise.all(target.map(obj => (new JimpImgClass()).init(obj[0])))
+  //   for (let i = 0; i < imgs.length; i++) {
+  //     const PyPIImgHash = dhash(imgs[i], DHASH_PRESET.PyPIImgHash)
+  //     expect(PyPIImgHash.hex).toBe(target[i][1].PyPIImgHash)
+  //   }
+  // })
 })

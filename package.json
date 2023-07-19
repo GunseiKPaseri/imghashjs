@@ -1,6 +1,6 @@
 {
   "name": "imghash-js",
-  "version": "0.0.3-alpha.7",
+  "version": "0.0.3-alpha.8",
   "description": "imghash on browser",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "eslint-plugin-jest": "^26.1.1",
-    "jimp": "^0.16.1"
+    "jimp": "^0.22.8"
   }
 }
