@@ -1,5 +1,5 @@
 import { __awaiter } from "tslib";
-import Jimp from 'jimp/browser/lib/jimp';
+import Jimp from 'jimp/es';
 export default class BrowserJimpImgClass {
     constructor(x) {
         this.img = x;

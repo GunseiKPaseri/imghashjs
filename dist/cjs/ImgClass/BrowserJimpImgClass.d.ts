@@ -1,4 +1,4 @@
-import Jimp from 'jimp/browser/lib/jimp';
+import Jimp from 'jimp/es';
 import ImgClass from './ImgClass';
 export default class BrowserJimpImgClass implements ImgClass {
     private img;
