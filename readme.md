@@ -10,3 +10,10 @@
 ## preset
 
 - [PyPI ImgHash](https://pypi.org/project/imghash/)
+
+## before push
+
+- lint
+- test
+- build
+- tagging
