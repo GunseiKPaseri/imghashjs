@@ -1,21 +1,4 @@
 /**
- * comvert image
- * @param img Jimp img object
- * @param w Width
- * @param h height
- * @param sequence 'rg'(resize->grayscale) 'gr'(grayscale->resize)
- */
-export const imgConvert = (img, w, h, sequence) => {
-    if (sequence === 'rg') {
-        img.resize(w, h, 'BICUBIC');
-        img.grayscale();
-    }
-    else {
-        img.grayscale();
-        img.resize(w, h, 'BICUBIC');
-    }
-};
-/**
  * get Average (mean)
  * @param array 2-dimensional array
  * @returns average

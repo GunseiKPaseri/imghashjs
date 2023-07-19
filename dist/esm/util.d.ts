@@ -1,12 +1,3 @@
-import ImgClass from './ImgClass/ImgClass';
-/**
- * comvert image
- * @param img Jimp img object
- * @param w Width
- * @param h height
- * @param sequence 'rg'(resize->grayscale) 'gr'(grayscale->resize)
- */
-export declare const imgConvert: (img: ImgClass, w: number, h: number, sequence: 'rg' | 'gr') => void;
 /**
  * get Average (mean)
  * @param array 2-dimensional array

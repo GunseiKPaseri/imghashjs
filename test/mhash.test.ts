@@ -1,5 +1,7 @@
-import mhash from '../src/mhash'
-import JimpImgClass from '../src/ImgClass/JimpImgClass'
+import { readFile } from 'fs/promises'
+import { loadImage } from '@napi-rs/canvas'
+import mhash from '../src/hash/mhash'
+import WasmCanvas from '../src/ImgClass/WasmCanvas'
 
 test('#mhash', async () => {
   const target = [
@@ -8,7 +10,9 @@ test('#mhash', async () => {
     './img/img_a_256_dirty.jpg',
     './img/img_b_256.jpg'
   ]
-  const imgs = await Promise.all(target.map(address => (new JimpImgClass()).init(address)))
+  const imgs = await Promise.all(
+    target.map(async (address) => (new WasmCanvas(await loadImage(await readFile(address)))))
+  )
   const hash = imgs.map(img => mhash(img))
   const score:number[][] = new Array(target.length)
   for (let i = 0; i < hash.length; i++) {

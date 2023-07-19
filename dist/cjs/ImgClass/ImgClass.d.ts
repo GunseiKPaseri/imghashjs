@@ -1,7 +1,12 @@
+import { ImageDataWrapper } from "./ImageDataWrapper";
 export default interface ImgClass {
-    getPixelRGB(x: number, y: number): number;
-    resize(width: number, height: number, algorithm: 'BICUBIC'): void;
-    grayscale(): void;
+    readonly width: number;
+    readonly height: number;
+    getImageDataWrapper(): ImageDataWrapper;
+    resize(option?: {
+        width: number;
+        height: number;
+    }): ImgClass;
     clone(): ImgClass;
 }
 //# sourceMappingURL=ImgClass.d.ts.map
