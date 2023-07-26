@@ -1,7 +1,7 @@
 {
   "name": "imghashjs",
-  "version": "0.0.3-alpha.13",
-  "description": "imghash on browser",
+  "version": "0.0.3-alpha.14",
+  "description": "generate imghash on browser and node",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -18,6 +18,14 @@
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "imagehash",
+    "browser",
+    "ahash",
+    "dhash",
+    "mhash",
+    "phash"
   ],
   "author": "GunseiKPaseri",
   "license": "MIT",
