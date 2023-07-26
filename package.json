@@ -1,6 +1,6 @@
 {
   "name": "imghash-js",
-  "version": "0.0.3-alpha.10",
+  "version": "0.0.3-alpha.11",
   "description": "imghash on browser",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -9,7 +9,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -r ./dist && npm run build:cjs && npm run build:esm",
+    "build": "rm -r ./dist ; npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "test": "jest",
