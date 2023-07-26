@@ -16,7 +16,10 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
-  "author": "",
+  "files": [
+    "dist"
+  ],
+  "author": "GunseiKPaseri",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.4.1",
