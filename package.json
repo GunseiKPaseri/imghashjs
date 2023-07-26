@@ -1,6 +1,6 @@
 {
   "name": "imghashjs",
-  "version": "0.0.3-alpha.14",
+  "version": "0.0.3-alpha.15",
   "description": "generate imghash on browser and node",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
