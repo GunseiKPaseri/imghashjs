@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BrowserCanvas = exports.WasmCanvas = exports.PHASH_PRESET = exports.MHASH_PRESET = exports.DHASH_PRESET = exports.AHASH_PRESET = exports.LUMA_COEFFICIENTS = exports.ImgHash = exports.mhash = exports.phash = exports.dhash = exports.ahash = void 0;
+exports.PHASH_PRESET = exports.MHASH_PRESET = exports.DHASH_PRESET = exports.AHASH_PRESET = exports.LUMA_COEFFICIENTS = exports.ImgHash = exports.mhash = exports.phash = exports.dhash = exports.ahash = void 0;
 const tslib_1 = require("tslib");
 const ahash_js_1 = tslib_1.__importStar(require("./hash/ahash.js"));
 exports.ahash = ahash_js_1.default;
@@ -18,8 +18,4 @@ const ImageDataWrapper_js_1 = require("./ImgClass/ImageDataWrapper.js");
 Object.defineProperty(exports, "LUMA_COEFFICIENTS", { enumerable: true, get: function () { return ImageDataWrapper_js_1.LUMA_COEFFICIENTS; } });
 const ImgHash_js_1 = tslib_1.__importDefault(require("./ImgHash.js"));
 exports.ImgHash = ImgHash_js_1.default;
-const WasmCanvas_js_1 = tslib_1.__importDefault(require("./ImgClass/WasmCanvas.js"));
-exports.WasmCanvas = WasmCanvas_js_1.default;
-const BrowserCanvas_js_1 = tslib_1.__importDefault(require("./ImgClass/BrowserCanvas.js"));
-exports.BrowserCanvas = BrowserCanvas_js_1.default;
 //# sourceMappingURL=index.js.map

@@ -4,8 +4,6 @@ import mhash, { type MHASH_OPTION, MHASH_PRESET } from './hash/mhash.js'
 import phash, { type PHASH_OPTION, PHASH_PRESET } from './hash/phash.js'
 import { LUMA_COEFFICIENTS, type LUM_C } from './ImgClass/ImageDataWrapper.js'
 import ImgHash from './ImgHash.js'
-import WasmCanvas from './ImgClass/WasmCanvas.js'
-import BrowserCanvas from './ImgClass/BrowserCanvas.js'
 
 export {
   ahash,
@@ -18,8 +16,6 @@ export {
   DHASH_PRESET,
   MHASH_PRESET,
   PHASH_PRESET,
-  WasmCanvas,
-  BrowserCanvas
 }
 
 export type {
