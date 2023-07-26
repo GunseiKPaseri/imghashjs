@@ -1,10 +1,17 @@
 # Image Hash JS
 
+[![npm](https://img.shields.io/npm/v/imghashjs)](https://www.npmjs.com/package/imghashjs)
+![npm](https://img.shields.io/npm/dw/imghashjs)
+![CI](https://github.com/GunseiKPaseri/imghashjs/workflows/CI/badge.svg)
+
 The image hash is a value representing a feature of the image.
 Since the purpose is to look at the similarity of images, unlike SHA-256 and MD5, similar images will yield similar values.
 
 ## example usage(browser)
 (react)
+
+use Browser Canvas (without wasm)
+
 ```js
 import BrowserCanvas from 'imghashjs/dist/esm/ImgClass/BrowserCanvas';
 import { phash } from 'imghashjs';
@@ -30,6 +37,9 @@ const inputFile: React.ChangeEventHandler<HTMLInputElement> =(e) => {
 
 ## example usage(node.js)
 (ts-node)
+
+use [@napi-rs/canvas](https://www.npmjs.com/package/@napi-rs/canvas)
+
 ```js
 import { readFile } from 'fs/promises'
 import WasmCanvas from 'imghashjs/dist/esm/ImgClass/WasmCanvas';
